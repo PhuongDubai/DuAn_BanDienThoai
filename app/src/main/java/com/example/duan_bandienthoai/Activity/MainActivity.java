@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ViewFlipper viewFlipper;
-    RecyclerView recyclerViewManHinhChinh;
+
     TextView tenNguoiDung;
     NguoiDungDao nguoiDungDao;
     NguoiDung nguoiDung;
@@ -66,8 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
         dao = new DienThoaiDao(getApplicationContext());
         list= dao.selectAll();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        rcv.setLayoutManager(layoutManager);
+
+       GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        rcv.setLayoutManager(gridLayoutManager);
+        rcv.setHasFixedSize(true);
+
         adapter = new DienThoaiAdapter(this,list);
         rcv.setAdapter(adapter);
 
