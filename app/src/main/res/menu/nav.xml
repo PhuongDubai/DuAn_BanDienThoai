@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/QLPM"
+        android:id="@+id/trangchu"
         android:icon="@drawable/home_icon"
         android:title="Tran Chủ" />
     <item
-        android:id="@+id/QLLS"
+        android:id="@+id/danhsach"
         android:icon="@drawable/successful"
         android:title="Danh sách điện thoại" />
 
@@ -16,6 +16,10 @@
     <group android:checkableBehavior="single">
         <item android:title="Người dùng">
             <menu>
+                <item
+                android:id="@+id/themsanpham"
+                android:icon="@drawable/addsanpham"
+                android:title="Thêm sản phẩm" />
 
                 <item
                     android:id="@+id/doimatkhau"
