@@ -4,7 +4,7 @@
     <item
         android:id="@+id/trangchu"
         android:icon="@drawable/home_icon"
-        android:title="Tran Chủ" />
+        android:title="Trang Chủ" />
     <item
         android:id="@+id/danhsach"
         android:icon="@drawable/successful"

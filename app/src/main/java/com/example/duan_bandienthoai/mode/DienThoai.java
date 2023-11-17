@@ -1,19 +1,23 @@
 package com.example.duan_bandienthoai.mode;
 
-public class DienThoai {
+import java.io.Serializable;
+
+public class DienThoai implements Serializable {
     private int id;
     private String name ;
     private int price;
     private String anh;
+    private String mota;
 
     public DienThoai() {
     }
 
-    public DienThoai(int id, String name, int price, String anh) {
+    public DienThoai(int id, String name, int price, String anh, String mota) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.anh = anh;
+        this.mota = mota;
     }
 
     public int getId() {
@@ -46,5 +50,13 @@ public class DienThoai {
 
     public void setAnh(String anh) {
         this.anh = anh;
+    }
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
     }
 }

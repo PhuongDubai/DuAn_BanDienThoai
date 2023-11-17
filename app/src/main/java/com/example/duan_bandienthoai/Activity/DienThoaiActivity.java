@@ -3,6 +3,7 @@ package com.example.duan_bandienthoai.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.duan_bandienthoai.Adapter.DienThoaiAdapter;
+import com.example.duan_bandienthoai.Adapter.DsDienThoaiAdapter;
 import com.example.duan_bandienthoai.R;
 import com.example.duan_bandienthoai.dao.DienThoaiDao;
 import com.example.duan_bandienthoai.mode.DienThoai;
@@ -22,7 +24,7 @@ public class DienThoaiActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     DienThoaiDao dao;
-    DienThoaiAdapter adapter;
+    DsDienThoaiAdapter adapter;
     private ArrayList<DienThoai> list = new ArrayList<DienThoai>();
     ArrayList<DienThoai> listtemp = new ArrayList<>();
 
@@ -36,9 +38,16 @@ public class DienThoaiActivity extends AppCompatActivity {
 
         dao = new DienThoaiDao(getApplicationContext());
         list = dao.selectAll();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new DienThoaiAdapter(this, list);
+
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,1);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recyclerView.setHasFixedSize(true);
+
+
+        adapter = new DsDienThoaiAdapter(this, list);
         recyclerView.setAdapter(adapter);
 
 

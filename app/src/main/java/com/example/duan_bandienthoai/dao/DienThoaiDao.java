@@ -32,6 +32,7 @@ public class DienThoaiDao {
                     dt.setName(cursor.getString(1));
                     dt.setPrice(cursor.getInt(2));
                     dt.setAnh(cursor.getString(3));
+                    dt.setMota(cursor.getString(4));
                     list.add(dt);
                     cursor.moveToNext();
                 }

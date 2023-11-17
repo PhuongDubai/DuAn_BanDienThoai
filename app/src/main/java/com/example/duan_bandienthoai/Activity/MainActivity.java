@@ -68,14 +68,12 @@ public class MainActivity extends AppCompatActivity {
         dao = new DienThoaiDao(getApplicationContext());
         list= dao.selectAll();
 
-       GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
+        RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(this,2);
         rcv.setLayoutManager(gridLayoutManager);
         rcv.setHasFixedSize(true);
 
         adapter = new DienThoaiAdapter(this,list);
         rcv.setAdapter(adapter);
-
-
 
 
         navigationView.setItemIconTintList(null);
@@ -134,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.trangchu) {
-                    startActivity(new Intent(MainActivity.this,DienThoaiActivity.class));
+                    drawerLayout.close();
                 } else if (item.getItemId() == R.id.danhsach) {
                     startActivity(new Intent(MainActivity.this,DienThoaiActivity.class));
                 }
