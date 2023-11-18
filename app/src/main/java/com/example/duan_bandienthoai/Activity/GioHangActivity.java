@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class GioHangActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Button btnmuahang;
     GioHangAdapter adapter;
+    int tongtiensp;
 
 
     @Override
@@ -41,12 +43,12 @@ public class GioHangActivity extends AppCompatActivity {
     }
 
     private void tinhtongtien() {
-        int tongtiensp = 0;
+        tongtiensp = 0;
         for (int i = 0; i < Utils.manggiohang.size(); i++) {
             tongtiensp = tongtiensp + (Utils.manggiohang.get(i).getGiasp() * Utils.manggiohang.get(i).getSoluong());
         }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        tongtien.setText(decimalFormat.format(tongtiensp)+" VND");
+        tongtien.setText(decimalFormat.format(tongtiensp) + " VND");
     }
 
     private void initControl() {
@@ -67,6 +69,14 @@ public class GioHangActivity extends AppCompatActivity {
             adapter = new GioHangAdapter(getApplicationContext(), Utils.manggiohang);
             recyclerView.setAdapter(adapter);
         }
+        btnmuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ThanhToanActivity.class);
+                intent.putExtra("tongtien", tongtiensp);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView() {
@@ -90,9 +100,10 @@ public class GioHangActivity extends AppCompatActivity {
         EventBus.getDefault().unregister(this);
         super.onStop();
     }
-    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
-    public  void eventTinhTien(TinhTongEvent event){
-        if(event != null){
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void eventTinhTien(TinhTongEvent event) {
+        if (event != null) {
             tinhtongtien();
         }
     }

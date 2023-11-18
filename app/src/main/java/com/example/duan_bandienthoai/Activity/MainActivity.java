@@ -87,18 +87,15 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager gridLayoutManager = new GridLayoutManager(this,2);
         rcv.setLayoutManager(gridLayoutManager);
         rcv.setHasFixedSize(true);
-
         adapter = new DienThoaiAdapter(this,list);
         rcv.setAdapter(adapter);
+
+
         navigationView.setItemIconTintList(null);
         View headerView  =navigationView.getHeaderView(0);
         tenNguoiDung = headerView.findViewById(R.id.userNGuoidung);
-        Intent intent= getIntent();
-        String user = intent.getStringExtra("user");
-        nguoiDungDao = new NguoiDungDao(this);
-        NguoiDung ng = nguoiDungDao.getID(user);
-        String username = ng.getHoTen();
-        tenNguoiDung.setText("Welcome "+ username+"!");
+
+
 
         if(Utils.manggiohang == null){
             Utils.manggiohang = new ArrayList<>();
