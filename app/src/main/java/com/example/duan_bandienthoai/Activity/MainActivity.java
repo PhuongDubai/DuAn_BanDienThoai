@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,12 +29,14 @@ import android.widget.ViewFlipper;
 import com.bumptech.glide.Glide;
 import com.example.duan_bandienthoai.Adapter.DienThoaiAdapter;
 import com.example.duan_bandienthoai.R;
+import com.example.duan_bandienthoai.Util.Utils;
 import com.example.duan_bandienthoai.dao.DienThoaiDao;
 import com.example.duan_bandienthoai.dao.NguoiDungDao;
 
 import com.example.duan_bandienthoai.mode.DienThoai;
 import com.example.duan_bandienthoai.mode.NguoiDung;
 import com.google.android.material.navigation.NavigationView;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     DienThoaiDao dao;
     DienThoaiAdapter adapter;
     private ArrayList<DienThoai> list = new ArrayList<DienThoai>();
+    NotificationBadge badge;
+    FrameLayout frameLayout;
 
 
     @Override
@@ -59,11 +64,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        AnhXa();
+        ActionBar();
+        ActionViewFlipper();
+        getEvenClick();
+    }
+    private  void AnhXa(){
         toolbar = findViewById(R.id.toobbar_manhinhchinh);
         viewFlipper = findViewById(R.id.viewlipper);
         rcv = findViewById(R.id.recycleview);
         drawerLayout = findViewById(R.id.drawerlayout);
         navigationView = findViewById(R.id.navigationview);
+        badge = findViewById(R.id.menu_sl);
+        frameLayout = findViewById(R.id.framegiohang);
+
 
         dao = new DienThoaiDao(getApplicationContext());
         list= dao.selectAll();
@@ -74,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new DienThoaiAdapter(this,list);
         rcv.setAdapter(adapter);
-
-
         navigationView.setItemIconTintList(null);
         View headerView  =navigationView.getHeaderView(0);
         tenNguoiDung = headerView.findViewById(R.id.userNGuoidung);
@@ -86,10 +100,37 @@ public class MainActivity extends AppCompatActivity {
         String username = ng.getHoTen();
         tenNguoiDung.setText("Welcome "+ username+"!");
 
-        ActionBar();
-        ActionViewFlipper();
-        getEvenClick();
+        if(Utils.manggiohang == null){
+            Utils.manggiohang = new ArrayList<>();
+
+        }else {
+            int totalItem= 0;
+            for(int i =  0 ; i<Utils.manggiohang.size() ;i++){
+                totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+            }
+            badge.setText(String.valueOf(totalItem));
+        }
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent giohang = new Intent(getApplicationContext(),GioHangActivity.class);
+                startActivity(giohang);
+            }
+        });
+
+
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int totalItem= 0;
+        for(int i =  0 ; i<Utils.manggiohang.size() ;i++){
+            totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+        }
+        badge.setText(String.valueOf(totalItem));
+    }
+
     private void ActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -44,15 +44,14 @@ public class DsDienThoaiAdapter extends RecyclerView.Adapter<DsDienThoaiAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-
         holder.txtTendt.setText(list.get(position).getName());
         holder.txtMota.setText(list.get(position).getMota());
-
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         holder.txtGiadt.setText("Giá: "+decimalFormat.format(list.get(position).getPrice()) +" VND");
 
         int img_id =((Activity)context).getResources().getIdentifier(list.get(position).getAnh(),"drawable",((Activity)context).getPackageName());
         holder.anh.setImageResource(img_id);
+
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int pos, boolean isLongClick) {
