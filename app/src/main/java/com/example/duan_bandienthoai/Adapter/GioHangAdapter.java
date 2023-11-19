@@ -46,7 +46,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.viewhold
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         GioHang gioHang = gioHangList.get(position);
 
-
         holder.item_giohang_tensp.setText(gioHang.getTensp());
         holder.item_giohang_soluong.setText(gioHang.getSoluong() + "");
 
