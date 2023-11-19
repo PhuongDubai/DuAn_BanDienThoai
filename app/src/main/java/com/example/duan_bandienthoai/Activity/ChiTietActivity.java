@@ -76,7 +76,7 @@ initControl();
             }
         }else {
             int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
-            int gia = dienThoai.getPrice() * soluong;
+            int gia = dienThoai.getPrice();
             GioHang gioHang = new GioHang();
             gioHang.setGiasp(gia);
             gioHang.setSoluong(soluong);
